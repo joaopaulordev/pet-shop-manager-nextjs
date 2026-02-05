@@ -1,0 +1,21 @@
+pnpm add -D prettier eslint-config-prettier eslint-plugin-prettier lefthook
+pnpm lefthook install
+
+
+---------------------Configurando Git-------------------------------------------
+git init
+git log
+git status
+git add .
+git commit -m "Implemented" --no-verify
+
+git branch -M main
+git remote add origin https://github.com/joaopaulordev/calendar-call-next.git
+git push -u origin main
+git push -f origin main
+git pull origin main
+---------
+git remote
+git remote rm origin
+git fetch origin main
+---------
