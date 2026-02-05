@@ -1,6 +1,24 @@
 pnpm add -D prettier eslint-config-prettier eslint-plugin-prettier lefthook
 pnpm lefthook install
 
+pnpm add prisma && pnpm add -D @prisma/client
+npx prisma init --datasource-provider postgresql
+npx prisma migrate dev --name "init"
+
+
+-------------------Dockerfile - Docker-compose ---------------------------------
+docker-compose up --build
+docker-compose up --build --force-recreate
+docker-compose up -d
+docker-compose down
+docker-compose ps
+
+docker start petshop-db
+docker stop petshop-db
+docker rm xxx xxx
+docker ps -a
+
+docker logs 5e39ac0c34c1
 
 ---------------------Configurando Git-------------------------------------------
 git init
