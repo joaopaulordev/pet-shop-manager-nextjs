@@ -7,14 +7,15 @@ git init
 git log
 git status
 git add .
-git commit -m "Implemented" --no-verify
+git commit -m "Initial configurations"
 
 git branch -M main
-git remote add origin https://github.com/joaopaulordev/calendar-call-next.git
+git remote add origin https://github.com/joaopaulordev/pet-shop-manager-nextjs.git
 git push -u origin main
 git push -f origin main
 git pull origin main
 ---------
+git remote -v
 git remote
 git remote rm origin
 git fetch origin main
