@@ -5,6 +5,9 @@ pnpm add prisma && pnpm add -D @prisma/client
 npx prisma init --datasource-provider postgresql
 npx prisma migrate dev --name "init"
 
+pnpm dlx shadcn@latest init
+pnpm dlx shadcn@latest add button
+
 
 -------------------Dockerfile - Docker-compose ---------------------------------
 docker-compose up --build
