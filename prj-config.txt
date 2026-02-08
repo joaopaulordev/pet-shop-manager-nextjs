@@ -2,8 +2,10 @@ pnpm add -D prettier eslint-config-prettier eslint-plugin-prettier lefthook
 pnpm lefthook install
 
 pnpm add prisma && pnpm add -D @prisma/client
+pnpm add @prisma/adapter-pg pg
 npx prisma init --datasource-provider postgresql
 npx prisma migrate dev --name "init"
+npx prisma generate
 
 pnpm dlx shadcn@latest init
 pnpm dlx shadcn@latest add button
