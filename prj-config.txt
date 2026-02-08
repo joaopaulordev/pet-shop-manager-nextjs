@@ -9,6 +9,20 @@ npx prisma generate
 
 pnpm dlx shadcn@latest init
 pnpm dlx shadcn@latest add button
+pnpm dlx shadcn@latest add dialog
+pnpm dlx shadcn@latest add form
+pnpm dlx shadcn@latest add label
+pnpm dlx shadcn@latest add input
+pnpm dlx shadcn@latest add textarea
+pnpm dlx shadcn@latest add calendar
+pnpm dlx shadcn@latest add popover
+pnpm dlx shadcn@latest add select
+
+pnpm add react-imask
+pnpm add date-fns
+pnpm add sonner
+
+pnpm add react-hook-form @hookform/resolvers zod 
 
 
 -------------------Dockerfile - Docker-compose ---------------------------------
