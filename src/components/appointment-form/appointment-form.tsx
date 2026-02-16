@@ -45,6 +45,9 @@ import {
   SelectValue,
 } from '../ui/select';
 import { toast } from 'sonner';
+import { createAppointment, updateAppointment } from '@/app/actions';
+import { useEffect, useState } from 'react';
+import { Appointment } from '@/types/appointment';
 
 const appointmentFormSchema = z
   .object({
@@ -75,7 +78,17 @@ const appointmentFormSchema = z
 
 type AppointFormValues = z.infer<typeof appointmentFormSchema>;
 
-export const AppointmentForm = () => {
+type AppointmentFormProps = {
+  appointment?: Appointment;
+  children?: React.ReactNode;
+};
+
+export const AppointmentForm = ({
+  appointment,
+  children,
+}: AppointmentFormProps) => {
+  const [isOpen, setIsOpen] = useState(false);
+
   const form = useForm<AppointFormValues>({
     resolver: zodResolver(appointmentFormSchema),
     defaultValues: {
@@ -88,22 +101,44 @@ export const AppointmentForm = () => {
     },
   });
 
-  const onSubmit = (data: AppointFormValues) => {
+  const onSubmit = async (data: AppointFormValues) => {
     const [hour, minute] = data.time.split(':');
 
     const scheduleAt = new Date(data.scheduleAt);
     scheduleAt.setHours(Number(hour), Number(minute), 0, 0);
 
-    toast.success(`Agendamento criado com sucesso! - ${scheduleAt.toString()}`);
+    const isEdit = !!appointment?.id;
 
-    // invoke SERVER ACTION
+    const result = isEdit
+      ? await updateAppointment(appointment.id, {
+          ...data,
+          scheduleAt,
+        })
+      : await createAppointment({
+          ...data,
+          scheduleAt,
+        });
+
+    if (result?.error) {
+      toast.error(result.error);
+      return;
+    }
+
+    toast.success(
+      `Agendamento ${isEdit ? 'atualizado' : 'criado'} com sucesso!`
+    );
+
+    setIsOpen(false);
+    form.reset();
   };
 
+  useEffect(() => {
+    form.reset(appointment);
+  }, [appointment, form]);
+
   return (
-    <Dialog>
-      <DialogTrigger asChild>
-        <Button variant="brand">Novo Agendamento</Button>
-      </DialogTrigger>
+    <Dialog open={isOpen} onOpenChange={setIsOpen}>
+      {children && <DialogTrigger asChild>{children}</DialogTrigger>}
 
       <DialogContent
         variant="appointment"
